@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require_relative '../bubblesort.rb'
+require_relative '../bubble_sort.rb'
 
 class QuickSortTest < Minitest::Test
   def test_call_method
