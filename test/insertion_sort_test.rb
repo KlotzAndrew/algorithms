@@ -1,7 +1,7 @@
 require "minitest/autorun"
 require_relative '../insertion_sort.rb'
 
-class QuickSortTest < Minitest::Test
+class InsertionSortTest < Minitest::Test
   def test_call_method
     assert_equal unsorted_array.sort,
                  InsertionSort.new.call(unsorted_array)
