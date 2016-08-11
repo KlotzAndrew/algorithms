@@ -1,48 +1,35 @@
 class DepthFirstSearch
-  def build_binary_array(connections, simple_nodes)
-    empty_connections = build_empty_connections(simple_nodes.length)
-
-    connections.each do |connection|
-      base_index   = simple_nodes.index(connection[0])
-      target_index = simple_nodes.index(connection[1])
-
-      empty_connections[base_index][target_index] = 1
-    end
-
-    empty_connections
-  end
-
-
-  def traverse(binary_array, nodes, node)
+  def traverse(adjacency_list, node)
     @result = []
     @stack = []
+    @traversed_graph = []
+    adjacency_list.length.times do
+      @traversed_graph << [false, nil]
+    end
 
-    search_nodes binary_array, nodes, node
+    search_nodes adjacency_list, node
 
-    @result
+    @traversed_graph
   end
 
   private
 
-  def search_nodes(binary_array, nodes, node)
+  def search_nodes(adjacency_list, node)
     return if @result.include? node
-    p "node here is +> #{node}"
+    @traversed_graph[node][0] = true
+    @traversed_graph[node][1] = @stack.last
+
     @result << node
     @stack << node
-    p "result => #{@result}"
-    p "stack => #{@stack}"
 
-    adjacent_nodes  = find_adjacent_nodes binary_array, nodes, node
-    p "adjacent_nodes => #{adjacent_nodes}"
+    adjacent_nodes  = find_adjacent_nodes adjacency_list, node
     available_nodes = filter_unvisited_nodes adjacent_nodes
 
-    p "available_nodes => #{available_nodes}"
     available_nodes.each do |available_node|
-      search_nodes(binary_array, nodes, available_node)
+      search_nodes(adjacency_list, available_node)
     end
 
     @stack.pop
-    p "stack after pop=> #{@stack}"
 
     @result
   end
@@ -51,25 +38,7 @@ class DepthFirstSearch
     adjacent_nodes.delete_if {|node| @result.include? node }
   end
 
-  def find_adjacent_nodes(binary_array, nodes, node)
-    node_index       = nodes.index(node)
-    node_connections = binary_array[node_index]
-
-    adjacent_connections = []
-    node_connections.each_with_index do |connection, index|
-      adjacent_connections << nodes[index] if connection == 1
-    end
-
-    adjacent_connections
+  def find_adjacent_nodes(adjacency_list, node)
+    adjacency_list[node]
   end
-
-  def build_empty_connections(length)
-    empty_array = []
-    length.times do
-      empty_array << Array.new(length, 0)
-    end
-
-    empty_array
-  end
-
 end
