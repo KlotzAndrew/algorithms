@@ -6,8 +6,6 @@ class DepthFirstSearchTest < Minitest::Test
     result = DepthFirstSearch.new.traverse adjacency_list, 0
 
     assert_equal expected_result_for_0, result
-
-
   end
 
   def adjacency_list
