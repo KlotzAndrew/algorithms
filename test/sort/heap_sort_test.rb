@@ -1,10 +1,10 @@
 require "minitest/autorun"
-require_relative '../merge_sort.rb'
+require_relative '../../lib/sort/heap_sort'
 
-class MergeSortTest < Minitest::Test
+class HeapSortTest < Minitest::Test
   def test_call_method
     assert_equal unsorted_array.sort,
-                 MergeSort.new.call(unsorted_array)
+                 HeapSort.new.call(unsorted_array)
   end
 
   def unsorted_array

@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../shunting_yard.rb'
+require_relative '../../lib/parse/shunting_yard'
 
 class ShuntingYardTest < Minitest::Test
   def test_build_reverse_polish

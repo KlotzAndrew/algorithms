@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require_relative '../insertion_sort.rb'
+require 'minitest/autorun'
+require_relative '../../lib/sort/insertion_sort'
 
 class InsertionSortTest < Minitest::Test
   def test_call_method

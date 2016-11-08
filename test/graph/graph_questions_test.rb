@@ -1,6 +1,6 @@
 require 'minitest/autorun'
-require_relative '../graph_questions.rb'
-require_relative '../depth_first_search.rb'
+require_relative '../../lib/graph/graph_questions'
+require_relative '../../lib/graph/depth_first_search'
 
 class GraphQuestionsTest < Minitest::Test
   def test_node_is_connected

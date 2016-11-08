@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require_relative '../radix_sort.rb'
+require 'minitest/autorun'
+require_relative '../../lib/sort/radix_sort'
 
 class RadixSortTest < Minitest::Test
   def test_call_method

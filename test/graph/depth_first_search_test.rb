@@ -1,9 +1,9 @@
 require 'minitest/autorun'
-require_relative '../breadth_first_search.rb'
+require_relative '../../lib/graph/depth_first_search'
 
-class BreadthFirstSearchTest < Minitest::Test
+class DepthFirstSearchTest < Minitest::Test
   def test_call_method
-    result = BreadthFirstSearch.new.traverse adjacency_list, 0
+    result = DepthFirstSearch.new.traverse adjacency_list, 0
 
     assert_equal expected_result_for_0, result
   end
@@ -29,7 +29,7 @@ class BreadthFirstSearchTest < Minitest::Test
       [false, nil],
       [true, 1],
       [false, nil],
-      [true, 0],
+      [true, 4],
       [false, nil]
     ]
   end

@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../binary_search_tree.rb'
+require_relative '../../lib/search/binary_search_tree'
 
 class BinarySearchTreeTest < Minitest::Test
   def test_create_method

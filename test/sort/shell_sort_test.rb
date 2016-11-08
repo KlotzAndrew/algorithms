@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require_relative '../shell_sort.rb'
+require 'minitest/autorun'
+require_relative '../../lib/sort/shell_sort'
 
 class ShellSortTest < Minitest::Test
   def test_call_method

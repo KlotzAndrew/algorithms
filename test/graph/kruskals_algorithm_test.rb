@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../kruskals_algorithm.rb'
+require_relative '../../lib/graph/kruskals_algorithm'
 
 class KruskalsAlgorithmTest < Minitest::Test
   def test_call_method

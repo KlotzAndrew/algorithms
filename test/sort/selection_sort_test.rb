@@ -1,5 +1,5 @@
-require "minitest/autorun"
-require_relative '../selection_sort.rb'
+require 'minitest/autorun'
+require_relative '../../lib/sort/selection_sort'
 
 class SelectionSortTest < Minitest::Test
   def test_call_method

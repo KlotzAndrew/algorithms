@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../topological_sort.rb'
+require_relative '../../lib/sort/topological_sort'
 
 class TopologicalSortTest < Minitest::Test
   def test_call_method

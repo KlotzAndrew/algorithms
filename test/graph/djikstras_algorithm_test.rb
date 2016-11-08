@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../djikstras_algorithm.rb'
+require_relative '../../lib/graph/djikstras_algorithm'
 
 class DjikstrasAlgorithmTest < Minitest::Test
   def test_call_method

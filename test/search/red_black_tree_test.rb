@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../red_black_tree.rb'
+require_relative '../../lib/search/red_black_tree'
 
 class RedBlackTreeTest < Minitest::Test
   def test_insert_node_rotate_left
