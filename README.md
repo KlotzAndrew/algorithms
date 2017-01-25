@@ -139,6 +139,14 @@ BinarySearchTree.new.search sorted_tree, 15 # false
 # TODO: add to readme
 ```
 
+##### Search Substring
+```ruby
+# Knuth Morris Pratt
+pattern  = 'AC'
+KnuthMorrisPratt.new(pattern).search('AAC') # true
+KnuthMorrisPratt.new(pattern).search('XYZ') # false
+```
+
 ##### Sort
 ```ruby
 # Bubble Sort
