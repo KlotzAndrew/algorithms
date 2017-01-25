@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/KlotzAndrew/algorithms/badges/gpa.svg)](https://codeclimate.com/github/KlotzAndrew/algorithms)
+
 # Algorithms
 
 Ruby implementations of popular algorithms!
