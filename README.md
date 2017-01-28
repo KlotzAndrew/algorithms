@@ -149,6 +149,13 @@ KnuthMorrisPratt.new(pattern).search('AAC') # true
 KnuthMorrisPratt.new(pattern).search('XYZ') # false
 ```
 
+```ruby
+# Boyer Moore
+pattern  = 'GTGGT'
+BoyerMoore.new(pattern).search('GabcTGGTGTGGT') # true
+BoyerMoore.new(pattern).search('aaaaa') # false
+```
+
 ##### Sort
 ```ruby
 # Bubble Sort
