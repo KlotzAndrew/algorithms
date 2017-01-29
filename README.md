@@ -4,6 +4,36 @@
 
 Ruby implementations of popular algorithms!
 
+## Table of Contents
+
+* Flow
+  * Ford Fulkerson
+* Graph
+  * Bellman Ford
+  * Depth First search
+  * Depth First search
+  * Djikstra's algorithm
+  * Kruskal's algorithm
+  * Prim's algorithm
+* Parse
+  * Shunting Yard
+* Search
+  * Binary Search Tree
+  * Red Black Tree
+* Search Substring
+  * Knuth Morris Pratt
+  * Boyer Moore
+  * Rabin Karp
+* Sort
+  * Bubble
+  * Heap
+  * Insertion
+  * Merge
+  * Quick
+  * Radix
+  * Shell
+  * Topological
+
 ##### Flow
 ```ruby
 # Ford Fulkerson
