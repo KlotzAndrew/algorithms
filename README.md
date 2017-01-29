@@ -1,4 +1,5 @@
 [![Code Climate](https://codeclimate.com/github/KlotzAndrew/algorithms/badges/gpa.svg)](https://codeclimate.com/github/KlotzAndrew/algorithms)
+[![Build Status](https://travis-ci.org/KlotzAndrew/algorithms.svg?branch=master)](https://travis-ci.org/KlotzAndrew/algorithms)
 
 # Algorithms
 
