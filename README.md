@@ -156,6 +156,13 @@ BoyerMoore.new(pattern).search('GabcTGGTGTGGT') # true
 BoyerMoore.new(pattern).search('aaaaa') # false
 ```
 
+```ruby
+# Rabin Karp
+pattern  = 'GTGGT'
+BoyerMoore.new(pattern).search('GabcTGGTGTGGT') # 8
+BoyerMoore.new(pattern).search('aaaaa') # nil
+```
+
 ##### Sort
 ```ruby
 # Bubble Sort
