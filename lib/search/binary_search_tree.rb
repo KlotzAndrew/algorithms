@@ -40,38 +40,6 @@ class BinarySearchTree
     search_max(node.right)
   end
 
-  def has_children?(node)
-    node.left || node.right
-  end
-
-  def leaf?(node)
-    node.left.nil? && node.right.nil?
-  end
-
-  def has_two_children?(node)
-    node.left && node.right
-  end
-
-  def has_only_left_child?(node)
-    node.left && node.right.nil?
-  end
-
-  def delete_root(root)
-    if leaf?(root)
-      return nil
-    elsif has_two_children?(root)
-      next_largest_value = search_min(root.right)
-      delete(root, next_largest_value)
-      root.value = next_largest_value
-    elsif has_only_left_child?(root)
-      root = root.left
-    else # only has right child
-      root = root.right
-    end
-    root
-  end
-
-
   def delete(root, value)
     if root.value == value
       root = delete_root(root)
@@ -83,12 +51,38 @@ class BinarySearchTree
 
     root
   end
-end
 
-class Node
-  attr_accessor :right, :left, :value # can add more data later
+  private
 
-  def initialize(value)
-    @value = value
+  def leaf?(node)
+    node.left.nil? && node.right.nil?
+  end
+
+  def two_children?(node)
+    node.left && node.right
+  end
+
+  def only_left_child?(node)
+    node.left && node.right.nil?
+  end
+
+  def delete_root(root)
+    return nil if leaf?(root)
+    if two_children?(root)
+      root.value = delete_two_children(root)
+    elsif only_left_child?(root)
+      root = root.left
+    else # only has right child
+      root = root.right
+    end
+    root
+  end
+
+  def delete_two_children(node)
+    next_largest_value = search_min(node.right)
+    delete(node, next_largest_value)
+    next_largest_value
   end
 end
+
+Node = Struct.new(:left, :right, :value)

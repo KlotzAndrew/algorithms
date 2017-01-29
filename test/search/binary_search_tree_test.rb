@@ -16,7 +16,7 @@ class BinarySearchTreeTest < Minitest::Test
     sorted_tree = BinarySearchTree.new.create [5, 10]
     updated_tree = BinarySearchTree.new.insert 15, sorted_tree
 
-    assert_equal nil, updated_tree.left
+    assert_nil updated_tree.left
     assert_equal 10, updated_tree.right.value
     assert_equal 15, updated_tree.right.right.value
   end
@@ -49,10 +49,10 @@ class BinarySearchTreeTest < Minitest::Test
     sorted_node = BinarySearchTree.new.create [10, 30, 4, 6, 15]
 
     result = BinarySearchTree.new.delete sorted_node, 6
-    assert_equal nil, result.left.right
+    assert_nil result.left.right
 
     result = BinarySearchTree.new.delete sorted_node, 15
-    assert_equal nil, result.right.left
+    assert_nil result.right.left
   end
 
   def test_delete_with_one_child
@@ -69,7 +69,7 @@ class BinarySearchTreeTest < Minitest::Test
     sorted_node = BinarySearchTree.new.create [99]
 
     result = BinarySearchTree.new.delete sorted_node, 99
-    assert_equal nil, result
+    assert_nil result
   end
 
   def test_delete_root_one_child
@@ -91,7 +91,6 @@ class BinarySearchTreeTest < Minitest::Test
 
     result = BinarySearchTree.new.delete sorted_node, 4
     assert_equal 5, result.left.value
-    assert_equal nil, result.left.right.left
 
     result = BinarySearchTree.new.delete sorted_node, 10
     assert_equal 15, result.value
