@@ -1,61 +1,68 @@
 class HeapSort
   def call(unsorted)
-    heaped_array = heapify unsorted
+    heap = heapify(unsorted)
 
-    sort_heap heaped_array
+    sort_heap(heap)
   end
 
-  def sort_heap(heaped_array)
+  private
+
+  def sort_heap(heap)
     sorted_array = []
 
-    heaped_array.length.times do
-      sorted_array.unshift heaped_array.shift
-      heaped_array.unshift heaped_array.pop
+    heap.length.times do
+      sorted_array.unshift heap.shift
+      heap.unshift heap.pop
 
-      sift_down(heaped_array, 0)
+      sift_down(heap, 0)
     end
 
     sorted_array
   end
 
   def heapify(unsorted)
-    start_index = parent_index(unsorted.length - 1)
+    index = parent_index(unsorted.length - 1)
 
-    start_index.downto(0) do |parent_index|
+    index.downto(0) do |parent_index|
       sift_down(unsorted, parent_index)
     end
 
     unsorted
   end
 
-  def sift_down(unsorted, start_index)
-    left_index  = left_child_index(start_index)
-    right_index = right_child_index(start_index)
-    swap_index  = start_index
+  def sift_down(heap, index)
+    swap_index = find_swap_index(heap, index)
+    return if swap_index == index
 
-    swap_index = left_index if swap_smaller? unsorted[swap_index], unsorted[left_index]
-    swap_index = right_index if swap_smaller? unsorted[swap_index], unsorted[right_index]
-
-    if swap_index != start_index
-      unsorted[swap_index], unsorted[start_index] = unsorted[start_index], unsorted[swap_index]
-      sift_down(unsorted, swap_index)
-    end
+    heap[swap_index], heap[index] = heap[index], heap[swap_index]
+    sift_down(heap, swap_index)
   end
 
-  def swap_smaller?(swap, new_value)
-    return false if new_value.nil?
-    return true if swap < new_value
+  def find_swap_index(heap, index)
+    left  = left_child(index)
+    right = right_child(index)
+    largest_child = find_largest_child(heap, left, right)
+
+    largest_child && heap[largest_child] > heap[index] ? largest_child : index
+  end
+
+  def find_largest_child(heap, left, right)
+    return nil unless heap[left] || heap[right]
+    return left unless heap[right]
+    return right unless heap[left]
+
+    heap[left] > heap[right] ? left : right
   end
 
   def parent_index(index)
     ((index - 1) / 2).floor
   end
 
-  def left_child_index(index)
+  def left_child(index)
     index * 2 + 1
   end
 
-  def right_child_index(index)
+  def right_child(index)
     index * 2 + 2
   end
 end
