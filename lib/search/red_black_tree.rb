@@ -5,7 +5,7 @@ class RedBlackTree
 
   def insert(value)
     root       = insert_node(value, @root)
-    root.color = :black if red?(root)
+    root.color = :black if root.red?
 
     @root = root
   end
@@ -17,7 +17,7 @@ class RedBlackTree
 
     if value < node.value
       node.left = insert_node(value, node.left)
-    elsif value >= node.value
+    else
       node.right = insert_node(value, node.right)
     end
 
@@ -25,57 +25,11 @@ class RedBlackTree
   end
 
   def enforce_rules(node)
-    node = rotate_left(node) if rotate_left?(node)
-    node = rotate_right(node) if rotate_right?(node)
-    node = flip_colors(node) if flip_colors?(node)
+    node = node.rotate_left if node.rotate_left?
+    node = node.rotate_right if node.rotate_right?
+    node = node.flip_colors if node.flip_colors?
 
     node
-  end
-
-  def rotate_left?(node)
-    red?(node.right) && !red?(node.left)
-  end
-
-  def rotate_right?(node)
-    red?(node.left) && red?(node.left.left)
-  end
-
-  def flip_colors?(node)
-    red?(node.left) && red?(node.right)
-  end
-
-  def flip_colors(node)
-    node.color       = :red
-    node.left.color  = :black
-    node.right.color = :black
-
-    node
-  end
-
-  def rotate_right(node)
-    left_node = node.left
-
-    node.left       = left_node.right
-    left_node.right = node
-    left_node.color = node.color
-    node.color      = :red
-
-    left_node
-  end
-
-  def rotate_left(node)
-    right_node = node.right
-
-    node.right       = right_node.left
-    right_node.left  = node
-    right_node.color = node.color
-    node.color       = :red
-
-    right_node
-  end
-
-  def red?(node)
-    node && node.color == :red
   end
 end
 
@@ -85,5 +39,54 @@ class Node
   def initialize(value)
     @value  = value
     @color  = :red
+  end
+
+  def flip_colors
+    self.color  = :red
+    left.color  = :black
+    right.color = :black
+
+    self
+  end
+
+  def rotate_right?
+    (left && left.red?) && (left.left && left.left.red?)
+  end
+
+  def rotate_left?
+    (right && right.red?) && (!left || !left.red?)
+  end
+
+  def flip_colors?
+    (left && left.red?) && (right && right.red?)
+  end
+
+  def rotate_left
+    right_node      = right
+    self.right      = right_node.left
+    right_node.left = self
+
+    finish_rotation(right_node)
+  end
+
+  def rotate_right
+    left_node       = left
+    self.left       = left_node.right
+    left_node.right = self
+
+    finish_rotation(left_node)
+  end
+
+  def red?
+    color == :red
+  end
+
+  private
+
+  def finish_rotation(rotated_node)
+    rotated_node.color = color
+    self.color         = :red
+
+    rotated_node
   end
 end
