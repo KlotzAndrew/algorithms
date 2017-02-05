@@ -7,6 +7,8 @@ Ruby implementations of popular algorithms!
 
 ## Table of Contents
 
+* Compression
+  * Huffman coding
 * Flow
   * Ford Fulkerson
 * Graph
@@ -34,6 +36,22 @@ Ruby implementations of popular algorithms!
   * Radix
   * Shell
   * Topological
+
+##### Compression
+```ruby
+# Huffman coding
+
+string  = 'ABRACADABRA!'
+encoder = HuffmanCoding.new
+
+compressed = encoder.compress(string) #=>
+# {
+#   bytes: '0111110010100100011111001011',
+#   key:   '01010000010010100010001010000111001000010101010010101000010'
+# }
+
+encoder.expand(compressed) #=> 'ABRACADABRA!'
+```
 
 ##### Flow
 ```ruby
