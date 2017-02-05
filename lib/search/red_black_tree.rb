@@ -1,32 +1,52 @@
 class RedBlackTree
-  def insert(number, root)
-    root = insert_node(number, root)
-    root.color = :black if node_red?(root)
+  def initialize
+    @root = nil
+  end
 
-    root
+  def insert(value)
+    root       = insert_node(value, @root)
+    root.color = :black if red?(root)
+
+    @root = root
   end
 
   private
 
-  def insert_node(number, node)
-    if node.nil?
-      return Node.new(number)
-    elsif number < node.value
-      node.left = insert_node(number, node.left)
-    elsif number >= node.value
-      node.right = insert_node(number, node.right)
+  def insert_node(value, node)
+    return Node.new(value) if node.nil?
+
+    if value < node.value
+      node.left = insert_node(value, node.left)
+    elsif value >= node.value
+      node.right = insert_node(value, node.right)
     end
 
-    node = rotate_left(node) if node_red?(node.right) && !node_red?(node.left)
-    node = rotate_right(node) if node_red?(node.left) && node_red?(node.left.left)
-    node = flip_colors(node) if node_red?(node.left) && node_red?(node.right)
+    enforce_rules(node)
+  end
+
+  def enforce_rules(node)
+    node = rotate_left(node) if rotate_left?(node)
+    node = rotate_right(node) if rotate_right?(node)
+    node = flip_colors(node) if flip_colors?(node)
 
     node
   end
 
+  def rotate_left?(node)
+    red?(node.right) && !red?(node.left)
+  end
+
+  def rotate_right?(node)
+    red?(node.left) && red?(node.left.left)
+  end
+
+  def flip_colors?(node)
+    red?(node.left) && red?(node.right)
+  end
+
   def flip_colors(node)
-    node.color = :red
-    node.left.color = :black
+    node.color       = :red
+    node.left.color  = :black
     node.right.color = :black
 
     node
@@ -35,10 +55,10 @@ class RedBlackTree
   def rotate_right(node)
     left_node = node.left
 
-    node.left = left_node.right
+    node.left       = left_node.right
     left_node.right = node
     left_node.color = node.color
-    node.color = :red
+    node.color      = :red
 
     left_node
   end
@@ -46,17 +66,16 @@ class RedBlackTree
   def rotate_left(node)
     right_node = node.right
 
-    node.right = right_node.left
-    right_node.left = node
+    node.right       = right_node.left
+    right_node.left  = node
     right_node.color = node.color
-    node.color = :red
+    node.color       = :red
 
     right_node
   end
 
-  def node_red?(node)
-    return false unless node
-    node.color == :red
+  def red?(node)
+    node && node.color == :red
   end
 end
 

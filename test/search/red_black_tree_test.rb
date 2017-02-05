@@ -2,44 +2,49 @@ require 'minitest/autorun'
 require_relative '../../lib/search/red_black_tree'
 
 class RedBlackTreeTest < Minitest::Test
-  def test_insert_node_rotate_left
-    result = RedBlackTree.new.insert 's', nil
-    result = RedBlackTree.new.insert 'e', result
-    result = RedBlackTree.new.insert 'a', result
+  def test_insert_node
+    string = 'searc'
+    tree = RedBlackTree.new
 
-    assert_equal 'e', result.value
+    string.chars.each { |c| tree.insert(c) }
+    result = tree.insert 'h'
+
+    assert_r(result)
+    assert_s(result)
+    assert_e(result)
+    assert_h(result)
+    assert_c(result)
+    assert_a(result)
+  end
+
+  private
+
+  def assert_r(result)
+    assert_equal 'r', result.value
     assert_equal :black, result.color
+  end
 
-    assert_equal 'a', result.left.value
-    assert_equal :black, result.left.color
-
+  def assert_s(result)
     assert_equal 's', result.right.value
     assert_equal :black, result.right.color
   end
 
-  def test_insert_node
-    result = RedBlackTree.new.insert 's', nil
-    result = RedBlackTree.new.insert 'e', result
-    result = RedBlackTree.new.insert 'a', result
-    result = RedBlackTree.new.insert 'r', result
-    result = RedBlackTree.new.insert 'c', result
-    result = RedBlackTree.new.insert 'h', result
-
-    assert_equal 'r', result.value
-    assert_equal :black, result.color
-
-    assert_equal 's', result.right.value
-    assert_equal :black, result.right.color
-
+  def assert_e(result)
     assert_equal 'e', result.left.value
     assert_equal :red, result.left.color
+  end
 
+  def assert_h(result)
     assert_equal 'h', result.left.right.value
     assert_equal :black, result.left.right.color
+  end
 
+  def assert_c(result)
     assert_equal 'c', result.left.left.value
     assert_equal :black, result.left.left.color
+  end
 
+  def assert_a(result)
     assert_equal 'a', result.left.left.left.value
     assert_equal :red, result.left.left.left.color
   end
